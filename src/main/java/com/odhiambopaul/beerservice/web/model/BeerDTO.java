@@ -23,4 +23,5 @@ public class BeerDTO {
   private Long upc;
   private BigDecimal price;
   private Integer quantityOrdered;
+
 }
