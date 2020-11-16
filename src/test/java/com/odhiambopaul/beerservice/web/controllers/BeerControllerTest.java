@@ -31,8 +31,7 @@ class BeerControllerTest {
 
   @Test
   void saveNewBeer() throws Exception {
-    BeerDTO beerDTO =
-        BeerDTO.builder().beerName("Tusker").upc(35457658L).price(new BigDecimal("400")).build();
+    BeerDTO beerDTO = getValidBeerDto();
     String beerDTOJson = objectMapper.writeValueAsString(beerDTO);
     mockMvc
         .perform(post("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON).content(beerDTOJson))
@@ -41,8 +40,7 @@ class BeerControllerTest {
 
   @Test
   void updateBeer() throws Exception {
-    BeerDTO beerDTO =
-        BeerDTO.builder().beerName("Tusker").upc(35459658L).price(new BigDecimal("400")).build();
+    BeerDTO beerDTO = getValidBeerDto();
     String beerDTOJson = objectMapper.writeValueAsString(beerDTO);
     mockMvc
         .perform(
@@ -57,5 +55,13 @@ class BeerControllerTest {
     mockMvc
         .perform(delete("/api/v1/beer/" + UUID.randomUUID().toString()))
         .andExpect(status().isNoContent());
+  }
+
+  BeerDTO getValidBeerDto() {
+    return BeerDTO.builder()
+        .beerName("Pilsnar")
+        .upc(35459658L)
+        .price(new BigDecimal("400"))
+        .build();
   }
 }
