@@ -2,12 +2,14 @@ package com.odhiambopaul.beerservice.web.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.odhiambopaul.beerservice.web.model.BeerDTO;
+import com.odhiambopaul.beerservice.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -29,7 +31,8 @@ class BeerControllerTest {
 
   @Test
   void saveNewBeer() throws Exception {
-    BeerDTO beerDTO = BeerDTO.builder().build();
+    BeerDTO beerDTO =
+        BeerDTO.builder().beerName("Tusker").upc(35457658L).price(new BigDecimal("400")).build();
     String beerDTOJson = objectMapper.writeValueAsString(beerDTO);
     mockMvc
         .perform(post("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON).content(beerDTOJson))
@@ -38,7 +41,8 @@ class BeerControllerTest {
 
   @Test
   void updateBeer() throws Exception {
-    BeerDTO beerDTO = BeerDTO.builder().build();
+    BeerDTO beerDTO =
+        BeerDTO.builder().beerName("Tusker").upc(35459658L).price(new BigDecimal("400")).build();
     String beerDTOJson = objectMapper.writeValueAsString(beerDTO);
     mockMvc
         .perform(

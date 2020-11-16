@@ -23,7 +23,7 @@ public class BeerDTO {
   @Null private OffsetDateTime createdDate;
   @Null private OffsetDateTime lastModifiedDate;
   @NotNull private String beerName;
-  @NotBlank private BeerStyleEnum beerStyle;
+  private BeerStyleEnum beerStyle;
   @Positive @NotNull private Long upc;
   @Positive @NotNull private BigDecimal price;
   private Integer quantityOrdered;

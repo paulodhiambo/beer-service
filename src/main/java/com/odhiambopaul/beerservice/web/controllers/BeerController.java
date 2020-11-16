@@ -3,8 +3,10 @@ package com.odhiambopaul.beerservice.web.controllers;
 import com.odhiambopaul.beerservice.web.model.BeerDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -16,13 +18,13 @@ public class BeerController {
   }
 
   @PostMapping
-  public ResponseEntity<BeerDTO> saveNewBeer(@RequestBody BeerDTO beerDTO) {
+  public ResponseEntity<BeerDTO> saveNewBeer(@Validated @RequestBody BeerDTO beerDTO) {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @PutMapping("/{beerId}")
   public ResponseEntity<BeerDTO> updateBeer(
-      @PathVariable("beerId") UUID beerId, @RequestBody BeerDTO beerDTO) {
+      @PathVariable("beerId") UUID beerId, @Validated @RequestBody BeerDTO beerDTO) {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
