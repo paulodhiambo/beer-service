@@ -1,5 +1,6 @@
 package com.odhiambopaul.beerservice.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class BeerDTO {
-  @Null private UUID id;
-  @Null private Integer version;
-  @Null private OffsetDateTime createdDate;
-  @Null private OffsetDateTime lastModifiedDate;
-  @NotNull private String beerName;
-  private BeerStyleEnum beerStyle;
-  @Positive @NotNull private Long upc;
-  @Positive @NotNull private BigDecimal price;
-  private Integer quantityOrdered;
+    @Null
+    private UUID id;
+    @Null
+    private Integer version;
+    @Null
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    private OffsetDateTime createdDate;
+    @Null
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    private OffsetDateTime lastModifiedDate;
+    @NotNull
+    private String beerName;
+    private BeerStyleEnum beerStyle;
+    @Positive
+    @NotNull
+    private Long upc;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Positive
+    @NotNull
+    private BigDecimal price;
+    private Integer quantityOrdered;
 }
