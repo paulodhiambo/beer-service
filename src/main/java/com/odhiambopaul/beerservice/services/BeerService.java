@@ -5,7 +5,12 @@ import com.odhiambopaul.beerservice.web.model.BeerDTO;
 import java.util.List;
 import java.util.UUID;
 
+import com.odhiambopaul.beerservice.web.model.BeerPageList;
+import com.odhiambopaul.beerservice.web.model.BeerStyleEnum;
+import org.springframework.data.domain.PageRequest;
+
 public interface BeerService {
+    BeerPageList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest);
     BeerDTO getBeerById(UUID beerId);
 
     BeerDTO saveNewBeer(BeerDTO beerDTO);
