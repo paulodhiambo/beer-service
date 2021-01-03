@@ -43,4 +43,5 @@ public class BeerServiceImpl implements BeerService {
     public BeerDTO deleteBeerById(UUID beerId) {
         return null;
     }
+
 }
