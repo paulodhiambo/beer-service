@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -24,7 +26,6 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public BeerPageList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
-
         BeerPageList beerPagedList;
         Page<Beer> beerPage;
 
@@ -40,6 +41,7 @@ public class BeerServiceImpl implements BeerService {
         } else {
             beerPage = beerRepository.findAll(pageRequest);
         }
+
         if (showInventoryOnHand) {
             beerPagedList = new BeerPageList(beerPage
                     .getContent()
@@ -62,14 +64,19 @@ public class BeerServiceImpl implements BeerService {
                     beerPage.getTotalElements());
         }
 
-
         return beerPagedList;
     }
 
     @Override
-    public BeerDTO getBeerById(UUID beerId) {
-        return beerMapper
-                .beerToBeerDto(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
+    public BeerDTO getBeerById(UUID beerId, Boolean showInventoryOnHand) {
+        if (showInventoryOnHand) {
+            return beerMapper
+                    .beerToBeerDtoWithInventory(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
+        } else {
+            return beerMapper
+                    .beerToBeerDto(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
+        }
+
     }
 
     @Override
