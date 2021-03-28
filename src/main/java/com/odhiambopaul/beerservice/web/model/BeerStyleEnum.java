@@ -4,5 +4,7 @@ public enum BeerStyleEnum {
   LISNA,
   PILSNAR,
   ACE,
-  IPA
+  IPA,
+  PALE_ALE,
+  PORTER
 }
