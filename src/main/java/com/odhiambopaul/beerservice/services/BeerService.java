@@ -19,4 +19,5 @@ public interface BeerService {
 
     BeerDTO deleteBeerById(UUID beerId);
 
+    BeerDTO getBeerByUpc(String upc);
 }
